@@ -77,17 +77,18 @@ public class RNPushNotificationHelper {
 
         if ( largeIcon != null ) {
             largeIconResId = res.getIdentifier(largeIcon, "mipmap", packageName);
-        } else {
-            largeIconResId = res.getIdentifier("ic_launcher", "mipmap", packageName);
-        }
 
-        Bitmap largeIconBitmap = BitmapFactory.decodeResource(res, largeIconResId);
+            if (largeIconResId != 0) {
+                Bitmap largeIconBitmap = BitmapFactory.decodeResource(res, largeIconResId);
 
-        if ( largeIconResId != 0 && ( largeIcon != null || android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ) ) {
-            notification.setLargeIcon(largeIconBitmap);
+                if (largeIconBitmap != null) {
+                    notification.setLargeIcon(largeIconBitmap);
+                }
+            }
         }
 
         notification.setSmallIcon(smallIconResId);
+        notification.setColor(0x7f285f);
 
         int notificationID;
         String notificationIDString = bundle.getString("id");
